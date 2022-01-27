@@ -1,0 +1,44 @@
+redProteoma <- read.table("./HumanProteome.txt", sep = "", header = TRUE)
+
+redProt.Filtered <- redProteoma[redProteoma[,3]>950,]
+
+redProt.Filtered[,1] <- gsub("9606.", redProt.Filtered[,1], replacement = "")
+
+redProt.Filtered[,2] <- gsub("9606.", redProt.Filtered[,2], replacement = "")
+
+red1.Traduccion <- bitr(redProt.Filtered[,1],fromType = "ENSEMBLPROT", toType = "SYMBOL", OrgDb = "org.Hs.eg.db")
+
+red2.Traduccion <- bitr(redProt.Filtered[,2],fromType = "ENSEMBLPROT", toType = "SYMBOL", OrgDb = "org.Hs.eg.db")
+
+cnt <- 1
+for (i in 1:length(redProt.Filtered[,1])){
+  oldNode1 <- redProt.Filtered[i,1]
+  newNode1 <- red1.Traduccion[red1.Traduccion[,1] == oldNode1,][,2]
+  oldNode2 <- redProt.Filtered[i,2]
+  newNode2 <- red2.Traduccion[red2.Traduccion[,1] == oldNode2,][,2]
+  if(length(newNode1>0)) {
+    redProt.Filtered[i,1] <- newNode1[1]
+  }
+  if (length(newNode2>0)){
+    redProt.Filtered[i,2] <- newNode2[1]
+  }
+  cnt <- cnt + 1
+  
+  
+}
+i <- 1
+while (i < length(redProt.Filtered[,1])){
+  if (substr(redProt.Filtered[i,1],1,4) == "ENSP"){
+    redProt.Filtered <- redProt.Filtered[-i,]
+  }
+  else if (substr(redProt.Filtered[i,2],1,4) == "ENSP"){
+    redProt.Filtered <- redProt.Filtered[-i,]
+  }
+  else{
+    i <- i+1
+  }
+}
+
+write.csv(redProt.Filtered, file = "./ProteomaTraducido.csv")
+
+save(redProt.Filtered, file = "./ProteomaTraducido.RData")
