@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 library(biomaRt)
 #Establecemos la conexión con la base de datos
 db.Connection <- useEnsembl(biomart = "genes")
@@ -24,7 +24,7 @@ traduccion1 <- getBM(attributes=c("uniprotswissprot", "ensembl_peptide_id"), fil
 
 traduccion2 <- getBM(attributes=c("uniprotswissprot", "ensembl_peptide_id"), filter="ensembl_peptide_id", values=interactoma.filtered[,2], mart=ensembl.Human.Dataset)
 
-=======
+
 library(biomaRt)
 #Establecemos la conexión con la base de datos
 db.Connection <- useEnsembl(biomart = "genes")
@@ -50,4 +50,4 @@ traduccion1 <- getBM(attributes=c("uniprotswissprot", "ensembl_peptide_id"), fil
 
 traduccion2 <- getBM(attributes=c("uniprotswissprot", "ensembl_peptide_id"), filter="ensembl_peptide_id", values=interactoma.filtered[,2], mart=ensembl.Human.Dataset)
 
->>>>>>> 91462d68b04a5a3c87619a8c51f65460204c0e3c
+
