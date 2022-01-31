@@ -41,6 +41,8 @@ while (i < length(redProt.Filtered[,1])){
   }
 }
 
+red950 <- redProt.Filtered
+
 write.csv(redProt.Filtered, file = "./ProteomaTraducido.csv")
 
 save(redProt.Filtered, file = "./ProteomaTraducido.RData")
@@ -88,6 +90,8 @@ while (i < length(redProt.Filtered[,1])){
     i <- i+1
   }
 }
+
+red800 <- redProt.Filtered
 
 write.csv(redProt.Filtered, file = "./ProteomaTraducido(800-950).csv")
 
@@ -137,6 +141,20 @@ while (i < length(redProt.Filtered[,1])){
   }
 }
 
+red650 <- redProt.Filtered
+
 write.csv(redProt.Filtered, file = "./ProteomaTraducido(650-800).csv")
 
 save(redProt.Filtered, file = "./ProteomaTraducido(650-800).RData")
+
+
+#### Union Redes 650+
+
+TempData1 <- rbind(red650, red800)
+
+ProteomaTCompleto <- rbind(TempData1, red950)
+
+
+write.csv(ProteomaTCompleto, file = "./ProteomaBitR650+.csv")
+
+save(ProteomaTCompleto, file = "./ProteomaBitR650+.RData")
