@@ -1,3 +1,5 @@
+#### Filtrado de 950+ score
+
 redProteoma <- read.table("./HumanProteome.txt", sep = "", header = TRUE)
 
 redProt.Filtered <- redProteoma[redProteoma[,3]>950,]
@@ -91,17 +93,20 @@ write.csv(redProt.Filtered, file = "./ProteomaTraducido(800-950).csv")
 
 save(redProt.Filtered, file = "./ProteomaTraducido(800-950).RData")
 
-redProteoma <- read.table("9606.protein.links.v11.5.txt", sep = "", header = TRUE)
 
-redProt.Filtered <- redProteoma[redProteoma[,3]>900,]
+#### Filtrado de 650 a 800 score
+
+redProteoma <- read.table("HumanProteinLinks.txt", sep = "", header = TRUE)
+
+redProt.Filtered <- redProteoma[redProteoma[,3]<=800&redProteoma[,3]>=650,]
 
 redProt.Filtered[,1] <- gsub("9606.", redProt.Filtered[,1], replacement = "")
 
 redProt.Filtered[,2] <- gsub("9606.", redProt.Filtered[,2], replacement = "")
 
-red1.Traduccion <- bitr(redProt.Filtered[,1],fromType = "ENSEMBLPROT", toType = "UNIPROT", OrgDb = "org.Hs.eg.db")
+red1.Traduccion <- bitr(redProt.Filtered[,1],fromType = "ENSEMBLPROT", toType = "SYMBOL", OrgDb = "org.Hs.eg.db")
 
-red2.Traduccion <- bitr(redProt.Filtered[,2],fromType = "ENSEMBLPROT", toType = "UNIPROT", OrgDb = "org.Hs.eg.db")
+red2.Traduccion <- bitr(redProt.Filtered[,2],fromType = "ENSEMBLPROT", toType = "SYMBOL", OrgDb = "org.Hs.eg.db")
 
 cnt <- 1
 for (i in 1:length(redProt.Filtered[,1])){
@@ -132,6 +137,6 @@ while (i < length(redProt.Filtered[,1])){
   }
 }
 
-write.csv(redProt.Filtered, file = "./ProteomaTraducido(800-950).csv")
+write.csv(redProt.Filtered, file = "./ProteomaTraducido(650-800).csv")
 
-save(redProt.Filtered, file = "./ProteomaTraducido(800-950).RData")
+save(redProt.Filtered, file = "./ProteomaTraducido(650-800).RData")
