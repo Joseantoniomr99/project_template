@@ -1,54 +1,53 @@
 
 \section{Resultados}
-\begin{document}
 
-\subsection{Obtención de datos en formato String}
-Se utilizan los tres métodos mencionados en la sección de Materiales y Métodos.
+\subsection{Obtencion de datos en formato String}
+Se utilizan los tres metodos mencionados en la seccion de Materiales y Metodos.
 
 \subsubsection{bitR}
-Para este análisis hemos usado el paquete bitR de Rstudio. Hemos realizado un bitR del proteoma humano para un score maayor de 650. Posteriormente hemos comprobado cuantas de las proteinas humanas de nuestra tabla de unión con covid se encuentra en nuestro proteoma obtenido. Posteriormente, hemos comprobado cuantas de ellas están unidas a genes covid, y cuantos genes covid son.
+Para este analisis hemos usado el paquete bitR de Rstudio. Hemos realizado un bitR del proteoma humano para un score maayor de 650. Posteriormente hemos comprobado cuantas de las proteinas humanas de nuestra tabla de union con covid se encuentra en nuestro proteoma obtenido. Posteriormente, hemos comprobado cuantas de ellas estan unidas a genes covid, y cuantos genes covid son.
 
 \subsubsection{biomaRt}
-Para este análisis hemos utilizado un paquete de Rstudio llamado biomaRt. Este paquete nos permite cambiar la codificación de uniprot a ensamble.
-El código perteneciente a este análisis se encuentra en la carpeta code y se denomina biomart.R. En este código viene detallado con comentarios el
-proceso que se ha llevado a cabo. Básicamente los pasos seguidos son: 
-- pasar de código uniprot a ensamble
-- comprobar cuantos de estos códigos ensamble se encuentran en el proteoma completo, guardamos en un dataframe los valores ensamble y uniprot.  Comprobamos que solo nos quedamos de 332 proteinas humanas unidas a viricas con 107.
+Para este analisis hemos utilizado un paquete de Rstudio llamado biomaRt. Este paquete nos permite cambiar la codificacion de uniprot a ensamble.
+El codigo perteneciente a este analisis se encuentra en la carpeta code y se denomina biomart.R. En este codigo viene detallado con comentarios el
+proceso que se ha llevado a cabo. Basicamente los pasos seguidos son: 
+- pasar de codigo uniprot a ensamble
+- comprobar cuantos de estos codigos ensamble se encuentran en el proteoma completo, guardamos en un dataframe los valores ensamble y uniprot.  Comprobamos que solo nos quedamos de 332 proteinas humanas unidas a viricas con 107.
 - Hacemos un bucle y guardamos en un dataframe los valores de uniprot y ensamble aquellos que coinciden con nuestra tabla de entrada.
 - Hacemos un merge que nos une los dos dataframe, el de entrada con genes covid y humanos, y el obtenido con el cambio de uniprot a ensamble. 
 
 
 \subsubsection{Tabla UniProt}
-Para este análisis hemos utilizado una tabla obtenida de la base de datos de UniProt, que contiene tres columnas. Un valor de uniprot, uno de ensamble y otro tipo de código uniprot para el mismo gen. 
-El código perteneciente a este análisis se encuentra en la carpeta code y se denomina tablaObtenidaUniprot.R. Nuevamente en el código vienen detallados los pasos seguidos. 
+Para este analisis hemos utilizado una tabla obtenida de la base de datos de UniProt, que contiene tres columnas. Un valor de uniprot, uno de ensamble y otro tipo de codigo uniprot para el mismo gen. 
+El codigo perteneciente a este analisis se encuentra en la carpeta code y se denomina tablaObtenidaUniprot.R. Nuevamente en el codigo vienen detallados los pasos seguidos. 
 El proceso llevado a cabo es el siguiente:
-- Leemos los ficheros: la tabla de uniprot, la tabla de relaciones entre genes viricos y humanos, y el proteoma de interacción completo. El fichero con la tabla de uniprot tiene filas que no contienen código ensamble para algunos de los genes. Así que realizaremos un filtrado que elimine estas filas.
-- Una vez realizado esto, buscaremos cuantos de estos codigos ensamble se encuentran en el proteoma completo. Vemos que solo perdemos cuatro de estos códigos.
+- Leemos los ficheros: la tabla de uniprot, la tabla de relaciones entre genes viricos y humanos, y el proteoma de interaccion completo. El fichero con la tabla de uniprot tiene filas que no contienen codigo ensamble para algunos de los genes. Asi que realizaremos un filtrado que elimine estas filas.
+- Una vez realizado esto, buscaremos cuantos de estos codigos ensamble se encuentran en el proteoma completo. Vemos que solo perdemos cuatro de estos codigos.
 - Posteriormente, buscaremos cuantos de los codigos uniprot de mi tabla de entrada podemos convertir a ensamble. 
 
 
-\subsection{Obtención del grafo de relaciones proteinascovid-proteinasHumanas}
+\subsection{Obtencion del grafo de relaciones proteinascovid-proteinasHumanas}
 
-Para abordar el problema de la creación de un grafo conexo, nos hemos enfrentado a tiempos de ejecución elevados y un gasto de memoria elevada. 
-El código denominado AlgoritmoRedCompleta.R muestra como se ha llevado a cabo el proceso de obtención de red. 
-Una vez obtenido en el apartado anterior la tabla con nuestros genes uniprot en formato string, ya podríamos usar funciones pertenecientes a igraph que buscaran rutas entre una y otra proteina humana dentro del proteoma. 
-Como primer paso se intento obtener todas las rutas posibles entre todas las proteinas humanas unidas al covid, usando la función all_simple_paths. 
-Nos enfrentamos a una compilación donde tras 15 horas de ejecución continua nuestro código no había terminado de definir las rutas entre las proteinas,además de haber generado un archivo de casi 15 gigas que por poco ocupaba toda la memoria de R. 
-Decidimos hacer una pequeña modificaciones y calcular todas las rutas posibles con la misma función pero simplemente haciendo las combinaciones de un gen con su siguiente. Nuevamente el tiempo de ejecución y la memoria ocupada eran inviables. 
-También se investigo el parametro cuttof que permitia establecer un tamaño minimo del camino, pero tampoco conseguiamos un resultado que su tiempo de ejecucion fuera factible. 
-Asi que, tras varios dias de prueba, decidimos usar la función all_shortest_path, que obtenia la ruta mas rapida de una proteina a otra. Creíamos que esto sería más rápido y obtendriamos los resultados necesarios para poder obtener el grafo. Pero nuevamente, vimos que el tiempo y la memoria que se ocupaba eran enormes. Otra opción era comparar una proteina con su siguiente, pero esto tras 5 horas y 8 gigas no habia terminado de compilar. 
-Como última opción, decidimos hacer una simplificación. Cogimos 2 genes humanos por cada gen de covid, e hicimos un dataframe. Este dataframe es el que usamos para obtener el grafo completo. 
+Para abordar el problema de la creacion de un grafo conexo, nos hemos enfrentado a tiempos de ejecucion elevados y un gasto de memoria elevada. 
+El codigo denominado AlgoritmoRedCompleta.R muestra como se ha llevado a cabo el proceso de obtencion de red. 
+Una vez obtenido en el apartado anterior la tabla con nuestros genes uniprot en formato string, ya podriamos usar funciones pertenecientes a igraph que buscaran rutas entre una y otra proteina humana dentro del proteoma. 
+Como primer paso se intento obtener todas las rutas posibles entre todas las proteinas humanas unidas al covid, usando la función all simple paths. 
+Nos enfrentamos a una compilacion donde tras 15 horas de ejecucion continua nuestro código no había terminado de definir las rutas entre las proteinas,además de haber generado un archivo de casi 15 gigas que por poco ocupaba toda la memoria de R. 
+Decidimos hacer una pequeña modificaciones y calcular todas las rutas posibles con la misma funcion pero simplemente haciendo las combinaciones de un gen con su siguiente. Nuevamente el tiempo de ejecucion y la memoria ocupada eran inviables. 
+Tambien se investigo el parametro cuttof que permitia establecer un tamaño minimo del camino, pero tampoco conseguiamos un resultado que su tiempo de ejecucion fuera factible. 
+Asi que, tras varios dias de prueba, decidimos usar la función all shortest path, que obtenia la ruta mas rapida de una proteina a otra. Creíamos que esto seria más rapido y obtendriamos los resultados necesarios para poder obtener el grafo. Pero nuevamente, vimos que el tiempo y la memoria que se ocupaba eran enormes. Otra opcion era comparar una proteina con su siguiente, pero esto tras 5 horas y 8 gigas no habia terminado de compilar. 
+Como ultima opción, decidimos hacer una simplificacion. Cogimos 2 genes humanos por cada gen de covid, e hicimos un dataframe. Este dataframe es el que usamos para obtener el grafo completo. 
 Probamos dos opciones, una de ellas utilizaba todas las combinaciones posibles entre estas dos proteinas de cada gen (51 proteinas en total) y la otra utilizaba una proteina con su siguiente. Para optimizacion de tiempo y memoria usamos la segunda de las opciones, obteniendo 100 elementos donde cada una tenia varias listas de uniones de grafos. Como muchas de ellas se repetian usamos unique y conseguimos reducir estas repeticiones. Obteniendo 18012 rutas, que seguiamn teniendo elementos repetidos. A continuación, creamos dos vectores, y hacemos un bucle que vaya recorriendo estas rutas, y me vaya añadiente una proteina en un vector, y la proteina con la que interacciona en el siguiente. Todo esto se integra en un data frame y usamos unique para eliminar las repeticiones. 
-Este dataframe lo convertimos en objeto igraph y mediante el operados de unión conseguimos unir dos objetos igraph, esto unirá los dos objetos igraph y ya podremos comprobar si hemos obtenido o no la componete conexa usando la función components. Es importante mencionar que para poder crear las rutas, nuestro grafo de proteoma debe tener una unica componente conexa, y si tiene mas de una, las proteinas buscadas pertenezcan al mismo. El resultado se comentará en el apartado de discusiones. 
+Este dataframe lo convertimos en objeto igraph y mediante el operados de unión conseguimos unir dos objetos igraph, esto unira los dos objetos igraph y ya podremos comprobar si hemos obtenido o no la componete conexa usando la función components. Es importante mencionar que para poder crear las rutas, nuestro grafo de proteoma debe tener una unica componente conexa, y si tiene mas de una, las proteinas buscadas pertenezcan al mismo. El resultado se comentara en el apartado de discusiones. 
 
 \subsection{Modularidad}
 
-Para obtener la modularidad del grafo hemos usado el paquete igraph. El código correspondiente se encuentra en un archivo llamado Modularidad y Centralidad.R
-Lo primero fue obtener los módulos del grafo mediante la función cluster_walktrap. Obtuvimos 68 grupos de tamaño diverso, desde 4 hasta 1778. Una vez obtenido esto, se le pasa a la función modularity transformándolo a un vector de membership (con la funcion membership) y pasando el grafo original como parámetro. El resultado es una modularidad de 0.935.
-Después de esto, representamos algunos valores pertinentes, como una lista de los tamaños de los grupos y Grafo en el que solo se ven los modulos coloreados.
+Para obtener la modularidad del grafo hemos usado el paquete igraph. El codigo correspondiente se encuentra en un archivo llamado Modularidad y Centralidad.R
+Lo primero fue obtener los modulos del grafo mediante la función cluster walktrap. Obtuvimos 68 grupos de tamaño diverso, desde 4 hasta 1778. Una vez obtenido esto, se le pasa a la funcion modularity transformándolo a un vector de membership (con la funcion membership) y pasando el grafo original como parámetro. El resultado es una modularidad de 0.935.
+Despues de esto, representamos algunos valores pertinentes, como una lista de los tamaños de los grupos y Grafo en el que solo se ven los modulos coloreados.
 Este grafo se hizo con plot.igraph, y nos muestra los 68 modulos por separado.
 Aparte, vimos la posibilidad de representar un dendograma, pero no aporta ninguna informacion util debido a la cantidad de datos.
 
 
 
-\end{document}
+
