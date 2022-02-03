@@ -43,9 +43,9 @@ Este dataframe lo convertimos en objeto igraph y mediante el operados de unión 
 
 \subsubsection{Modularidad}
 
-Para obtener la modularidad del grafo hemos usado el paquete igraph. El codigo correspondiente se encuentra en un archivo llamado Modularidad y Centralidad.R
-Lo primero fue obtener los modulos del grafo mediante la funcion cluster_walktrap. Obtuvimos 68 grupos de tamaño diverso, desde 4 hasta 1778. Una vez obtenido esto, se le pasa a la función modularity transformandolo a un vector de membership (con la funcion membership) y pasando el grafo original como parametro. El resultado es una modularidad de 0.935.
-Despues de esto, representamos algunos valores pertinentes, como una lista de los tamaños de los grupos y Grafo en el que solo se ven los modulos coloreados.
+Para obtener la modularidad del grafo hemos usado el paquete igraph. El código correspondiente se encuentra en un archivo llamado Modularidad y Centralidad.R
+Lo primero fue obtener los módulos del grafo mediante la función cluster_walktrap. Obtuvimos 68 grupos de tamaño diverso, desde 4 hasta 1778. Una vez obtenido esto, se le pasa a la función modularity transformándolo a un vector de membership (con la funcion membership) y pasando el grafo original como parámetro. El resultado es una modularidad de 0.935.
+Después de esto, representamos algunos valores pertinentes, como una lista de los tamaños de los grupos y Grafo en el que solo se ven los modulos coloreados.
 Este grafo se hizo con plot.igraph, y nos muestra los 68 modulos por separado.
 Aparte, vimos la posibilidad de representar un dendograma, pero no aporta ninguna informacion util debido a la cantidad de datos.
 
