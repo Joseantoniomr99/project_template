@@ -1,32 +1,19 @@
 \section{Materiales y métodos}
 \begin{document}
+
+\subsection{Obtención de datos en formato String}
 En este estudio debemos realizar una ampliación de la red de proteínas humanas unidas a proteínas víricas.
 Esta ampliación debe hacerse usando una red de string, que emplea código ensamble para nombrar a las proteínas.
 Nuestros datos están codificados con symbol o Uniprot. Por tanto, debemos hacer un cambio de esta codificación a ensamble.
 Para esto hemos empleado tres métodos, y nos quedaremos con aquel que nos permita trabajar con el mayor numero de genes humanos unidos a los genes del covid.
 Los métodos empleados son: bitR, biomaRt, y utilizar una tabla obtenida de la base de datos de uniprot. 
-\subsection{bitR}
 
+\subsection{Obtención del grafo de relaciones proteinascovid-proteinasHumanas}
+Para la realización del grafo con una única componente conexa, donde se forme la red mínima del interactoma humano
+que permita conectar todas las proteínas víricas del SARS-CoV2, hemos usado las funciones all_simple_paths y all_shortest_paths 
+del paquete igraph de R. Debido al gran tamaño de la red y a las miles de combinaciones posibles, obteniamos caminos enormes que
+se han abordado realizando pequeñas modificaciones que nos permita obtener la componente conexa con un tiempo de ejecución y 
+uso de memoria razonable. 
 
-\subsection{biomaRt}
-Para este análisis hemos utilizado un paquete de Rstudio llamado biomaRt. Este paquete nos permite cambiar la codificación de uniprot a ensamble.
-El código perteneciente a este análisis se encuentra en la carpeta code y se denomina biomart.R. En este código viene detallado con comentarios el
-proceso que se ha llevado a cabo. Básicamente los pasos seguidos son: 
-- pasar de código uniprot a ensamble
-- comprobar cuantos de estos códigos ensamble se encuentran en el proteoma completo, guardamos en un dataframe los valores ensamble y uniprot.  Comprobamos que solo nos quedamos de 332 proteinas humanas unidas a viricas con 107.
-- Hacemos un bucle y guardamos en un dataframe los valores de uniprot y ensamble aquellos que coinciden con nuestra tabla de entrada.
-- Hacemos un merge que nos une los dos dataframe, el de entrada con genes covid y humanos, y el obtenido con el cambio de uniprot a ensamble. Y observamos que ademas de perder 225 genes humanos, perdemos tambien 4 genes viricos pertenecientes al Covid. 
-
-
-\subsection{Tabla UniProt}
-Para este análisis hemos utilizado una tabla obtenida de la base de datos de UniProt, que contiene tres columnas. Un valor de uniprot, uno de ensamble y otro tipo de código uniprot para el mismo gen. 
-El código perteneciente a este análisis se encuentra en la carpeta code y se denomina tablaObtenidaUniprot.R. Nuevamente en el código vienen detallados los pasos seguidos. 
-El proceso llevado a cabo es el siguiente:
-- Leemos los ficheros: la tabla de uniprot, la tabla de relaciones entre genes viricos y humanos, y el proteoma de interacción completo. El fichero con la tabla de uniprot tiene filas que no contienen código ensamble para algunos de los genes. Así que realizaremos un filtrado que elimine estas filas.
-- Una vez realizado esto, buscaremos cuantos de estos codigos ensamble se encuentran en el proteoma completo. Vemos que solo perdemos cuatro de estos códigos.
-- Posteriormente, buscaremos cuantos de los codigos uniprot de mi tabla de entrada podemos convertir a ensamble. Donde observamos que perdemos unicamente cuatro genes humanos y ninguno virico.
-
-\subsection{Conclusion de datos a emplear}
-Tras comparar los resultados de los tres algoritmos anteriores. Vemos que la tabla final que deberemos usar para el análisis se obtiene usando el tercer método, donde no perdemos ninguna proteina virica y unicamente perdemos 4 de las humanas.
 
 \end{document}
