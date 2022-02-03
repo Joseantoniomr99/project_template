@@ -15,7 +15,7 @@ proceso que se ha llevado a cabo. Básicamente los pasos seguidos son:
 - pasar de código uniprot a ensamble
 - comprobar cuantos de estos códigos ensamble se encuentran en el proteoma completo, guardamos en un dataframe los valores ensamble y uniprot.  Comprobamos que solo nos quedamos de 332 proteinas humanas unidas a viricas con 107.
 - Hacemos un bucle y guardamos en un dataframe los valores de uniprot y ensamble aquellos que coinciden con nuestra tabla de entrada.
-- Hacemos un merge que nos une los dos dataframe, el de entrada con genes covid y humanos, y el obtenido con el cambio de uniprot a ensamble. Y observamos que ademas de perder 225 genes humanos, perdemos tambien 4 genes viricos pertenecientes al Covid. 
+- Hacemos un merge que nos une los dos dataframe, el de entrada con genes covid y humanos, y el obtenido con el cambio de uniprot a ensamble. 
 
 
 \subsubsection{Tabla UniProt}
@@ -24,7 +24,7 @@ El código perteneciente a este análisis se encuentra en la carpeta code y se d
 El proceso llevado a cabo es el siguiente:
 - Leemos los ficheros: la tabla de uniprot, la tabla de relaciones entre genes viricos y humanos, y el proteoma de interacción completo. El fichero con la tabla de uniprot tiene filas que no contienen código ensamble para algunos de los genes. Así que realizaremos un filtrado que elimine estas filas.
 - Una vez realizado esto, buscaremos cuantos de estos codigos ensamble se encuentran en el proteoma completo. Vemos que solo perdemos cuatro de estos códigos.
-- Posteriormente, buscaremos cuantos de los codigos uniprot de mi tabla de entrada podemos convertir a ensamble. Donde observamos que perdemos unicamente cuatro genes humanos y ninguno virico.
+- Posteriormente, buscaremos cuantos de los codigos uniprot de mi tabla de entrada podemos convertir a ensamble. 
 
 
 \subsection{Obtención del grafo de relaciones proteinascovid-proteinasHumanas}
