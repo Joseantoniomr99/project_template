@@ -29,4 +29,35 @@ El proceso llevado a cabo es el siguiente:
 
 \subsection{Obtención del grafo de relaciones proteinascovid-proteinasHumanas}
 
-\
+Para abordar el problema de la creación de un grafo conexo, nos hemos enfrentado a tiempos de ejecución elevados y un gasto de memoria elevada. 
+El código denominado AlgoritmoRedCompleta.R muestra como se ha llevado a cabo el proceso de obtención de red. 
+Una vez obtenido en el apartado anterior la tabla con nuestros genes uniprot en formato string, ya podríamos usar funciones pertenecientes a igraph que buscaran rutas entre una y otra proteina humana dentro del proteoma. 
+Como primer paso se intento obtener todas las rutas posibles entre todas las proteinas humanas unidas al covid, usando la función all_simple_paths. 
+Nos enfrentamos a una compilación donde tras 15 horas de ejecución continua nuestro código no había terminado de definir las rutas entre las proteinas,además de haber generado un archivo de casi 15 gigas que por poco ocupaba toda la memoria de R. 
+Decidimos hacer una pequeña modificaciones y calcular todas las rutas posibles con la misma función pero simplemente haciendo las combinaciones de un gen con su siguiente. Nuevamente el tiempo de ejecución y la memoria ocupada eran inviables. 
+También se investigo el parametro cuttof que permitia establecer un tamaño minimo del camino, pero tampoco conseguiamos un resultado que su tiempo de ejecucion fuera factible. 
+Asi que, tras varios dias de prueba, decidimos usar la función all_shortest_path, que obtenia la ruta mas rapida de una proteina a otra. Creíamos que esto sería más rápido y obtendriamos los resultados necesarios para poder obtener el grafo. Pero nuevamente, vimos que el tiempo y la memoria que se ocupaba eran enormes. Otra opción era comparar una proteina con su siguiente, pero esto tras 5 horas y 8 gigas no habia terminado de compilar. 
+Como última opción, decidimos hacer una simplificación. Cogimos 2 genes humanos por cada gen de covid, e hicimos un dataframe. Este dataframe es el que usamos para obtener el grafo completo. 
+Probamos dos opciones, una de ellas utilizaba todas las combinaciones posibles entre estas dos proteinas de cada gen (51 proteinas en total) y la otra utilizaba una proteina con su siguiente. Para optimizacion de tiempo y memoria usamos la segunda de las opciones, obteniendo 100 elementos donde cada una tenia varias listas de uniones de grafos. Como muchas de ellas se repetian usamos unique y conseguimos reducir estas repeticiones. Obteniendo 18012 rutas, que seguiamn teniendo elementos repetidos. A continuación, creamos dos vectores, y hacemos un bucle que vaya recorriendo estas rutas, y me vaya añadiente una proteina en un vector, y la proteina con la que interacciona en el siguiente. Todo esto se integra en un data frame y usamos unique para eliminar las repeticiones. 
+Este dataframe lo convertimos en objeto igraph y mediante %u% conseguimos unir dos objetos igraph, esto unirá los dos objetos igraph y ya podremos comprobar si hemos obtenido o no la componete conexa usando la función components. Es importante mencionar que para poder crear las rutas, nuestro grafo de proteoma debe tener una unica componente conexa, y si tiene mas de una, las proteinas buscadas pertenezcan al mismo. El resultado se comentará en el apartado de discusiones. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
