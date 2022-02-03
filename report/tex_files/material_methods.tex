@@ -1,29 +1,27 @@
 \section{Materiales y métodos}
-\begin{document}
+
 
 \subsection{Obtención de datos en formato String}
-En este estudio debemos realizar una ampliación de la red de proteínas humanas unidas a proteínas víricas.
-Esta ampliación debe hacerse usando una red de string, que emplea código ensamble para nombrar a las proteínas.
-Nuestros datos están codificados con symbol o Uniprot. Por tanto, debemos hacer un cambio de esta codificación a ensamble.
-Para esto hemos empleado tres métodos, y nos quedaremos con aquel que nos permita trabajar con el mayor numero de genes humanos unidos a los genes del covid.
+En este estudio debemos realizar una ampliacion de la red de proteinas humanas unidas a proteinas viricas.
+Esta ampliacion debe hacerse usando una red de string, que emplea codigo ensamble para nombrar a las proteinas.
+Nuestros datos están codificados con symbol o Uniprot. Por tanto, debemos hacer un cambio de esta codificacion a ensamble.
+Para esto hemos empleado tres metodos, y nos quedaremos con aquel que nos permita trabajar con el mayor numero de genes humanos unidos a los genes del covid.
 Los métodos empleados son: bitR, biomaRt, y utilizar una tabla obtenida de la base de datos de uniprot. 
 
 \subsection{Obtención del grafo de relaciones proteinascovid-proteinasHumanas}
-Para la realización del grafo con una única componente conexa, donde se forme la red mínima del interactoma humano
-que permita conectar todas las proteínas víricas del SARS-CoV2, hemos usado las funciones all_simple_paths y all_shortest_paths 
+Para la realizacion del grafo con una unica componente conexa, donde se forme la red minima del interactoma humano
+que permita conectar todas las proteínas viricas del SARS-CoV2, hemos usado las funciones all\_simple\_paths y all\_shortest\_paths 
 del paquete igraph de R. Debido al gran tamaño de la red y a las miles de combinaciones posibles, obteniamos caminos enormes que
-se han abordado realizando pequeñas modificaciones que nos permita obtener la componente conexa con un tiempo de ejecución y 
+se han abordado realizando pequeñas modificaciones que nos permita obtener la componente conexa con un tiempo de ejecucion y 
 uso de memoria razonable. 
 
 \subsection{Obtencion de la modularidad}
-Para estudiar la modularidad del grafo obtenido hemos utilizado únicamente el paquete iGraph, ya que su combinación de funiones nos permite obtener justo lo que necesitamos.
-En este caso, las funiones principales son cluster_walktrap y modularity. Cluster_walktrap encontrará los subgrafos o comunidades en nuestro grafo a traves de recorridos aleatorios, y modulatiry calculará la modularidad a partir de ellos. 
-A parte, la funión communities me ha permitido ver claramente los grupos, y posteriormente representarlos con plot.igraph.
+Para estudiar la modularidad del grafo obtenido hemos utilizado unicamente el paquete iGraph, ya que su combinacion de funciones nos permite obtener justo lo que necesitamos.
+En este caso, las funciones principales son cluster\_walktrap y modularity. Cluster\_walktrap encontrara los subgrafos o comunidades en nuestro grafo a traves de recorridos aleatorios, y modulatiry calculara la modularidad a partir de ellos. 
+A parte, la funcion communities me ha permitido ver claramente los grupos, y posteriormente representarlos con plot.igraph.
 
 \subsection{Obtencion de la centralidad}
 La centralidad determina la importancia que puede obtener un nodo dentro de una red.
 Con el objetivo de estudiar la centralidad de nuestra red, se ha decidido emplear los paquetes \textbf{igraph} y \textbf{CINNA} principalmente.
-Mediante el paquete CINNA hemos decidido comprobar la centralidad que se obtiene mediante algunos de los métodos más comunes como pueden ser el algoritmo \textbf{page-rank}, centralidad mediante el grado de cada \textbf{nodo}, la centralidad basada en la \textbf{cercanía} y la centralidad a través del \textbf{betweeness}(capacidad para estar en medio de los paths biológicos importantes).
+Mediante el paquete CINNA hemos decidido comprobar la centralidad que se obtiene mediante algunos de los metodos mas comunes como pueden ser el algoritmo \textbf{page-rank}, centralidad mediante el grado de cada \textbf{nodo}, la centralidad basada en la \textbf{cercania} y la centralidad a traves del \textbf{betweeness}(capacidad para estar en medio de los paths biologicos importantes).
 Se ha escogido el algoritmo closeness ya que se ha visto como el más eficiente según la pca.
-
-\end{document}
