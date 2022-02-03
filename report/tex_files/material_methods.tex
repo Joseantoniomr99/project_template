@@ -20,4 +20,10 @@ Para estudiar la modularidad del grafo obtenido hemos utilizado únicamente el p
 En este caso, las funiones principales son cluster_walktrap y modularity. Cluster_walktrap encontrará los subgrafos o comunidades en nuestro grafo a traves de recorridos aleatorios, y modulatiry calculará la modularidad a partir de ellos. 
 A parte, la funión communities me ha permitido ver claramente los grupos, y posteriormente representarlos con plot.igraph.
 
+\subsection{Obtencion de la centralidad}
+La centralidad determina la importancia que puede obtener un nodo dentro de una red.
+Con el objetivo de estudiar la centralidad de nuestra red, se ha decidido emplear los paquetes \textbf{igraph} y \textbf{CINNA} principalmente.
+Mediante el paquete CINNA hemos decidido comprobar la centralidad que se obtiene mediante algunos de los métodos más comunes como pueden ser el algoritmo \textbf{page-rank}, centralidad mediante el grado de cada \textbf{nodo}, la centralidad basada en la \textbf{cercanía} y la centralidad a través del \textbf{betweeness}(capacidad para estar en medio de los paths biológicos importantes).
+Se ha escogido el algoritmo closeness ya que se ha visto como el más eficiente según la pca.
+
 \end{document}
