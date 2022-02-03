@@ -41,22 +41,13 @@ Como última opción, decidimos hacer una simplificación. Cogimos 2 genes human
 Probamos dos opciones, una de ellas utilizaba todas las combinaciones posibles entre estas dos proteinas de cada gen (51 proteinas en total) y la otra utilizaba una proteina con su siguiente. Para optimizacion de tiempo y memoria usamos la segunda de las opciones, obteniendo 100 elementos donde cada una tenia varias listas de uniones de grafos. Como muchas de ellas se repetian usamos unique y conseguimos reducir estas repeticiones. Obteniendo 18012 rutas, que seguiamn teniendo elementos repetidos. A continuación, creamos dos vectores, y hacemos un bucle que vaya recorriendo estas rutas, y me vaya añadiente una proteina en un vector, y la proteina con la que interacciona en el siguiente. Todo esto se integra en un data frame y usamos unique para eliminar las repeticiones. 
 Este dataframe lo convertimos en objeto igraph y mediante el operados de unión conseguimos unir dos objetos igraph, esto unirá los dos objetos igraph y ya podremos comprobar si hemos obtenido o no la componete conexa usando la función components. Es importante mencionar que para poder crear las rutas, nuestro grafo de proteoma debe tener una unica componente conexa, y si tiene mas de una, las proteinas buscadas pertenezcan al mismo. El resultado se comentará en el apartado de discusiones. 
 
+\subsubsection{Modularidad}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Para obtener la modularidad del grafo hemos usado el paquete igraph. El codigo correspondiente se encuentra en un archivo llamado Modularidad y Centralidad.R
+Lo primero fue obtener los modulos del grafo mediante la funcion cluster_walktrap. Obtuvimos 68 grupos de tamaño diverso, desde 4 hasta 1778. Una vez obtenido esto, se le pasa a la función modularity transformandolo a un vector de membership (con la funcion membership) y pasando el grafo original como parametro. El resultado es una modularidad de 0.935.
+Despues de esto, representamos algunos valores pertinentes, como una lista de los tamaños de los grupos y Grafo en el que solo se ven los modulos coloreados.
+Este grafo se hizo con plot.igraph, y nos muestra los 68 modulos por separado.
+Aparte, vimos la posibilidad de representar un dendograma, pero no aporta ninguna informacion util debido a la cantidad de datos.
 
 
 
