@@ -89,3 +89,27 @@ En primer lugar, ho hay ningún valor de centralidad menor que 0.1. Con un valor
 Para comprobar la robustez de nuestro grafo vamos a realizar dos ataques dirigidos, uno basado en degree y otro en betweenness. En ambos casos representaremos el numero restante de nodos conexos por cada ataque en una grafica. Tras obtener los resultados, podemos observar que el ataque basado en betweenness deshace el grafo mucho mas rapido que el de degree. Esto tiene sentido ya que eliminar nodos clave con muchas uniones es muy eficaz. De hecho podemos ver que con el primer ataque ya reducimos la red de 9000 nodos a poco mas de 3000. Por tanto podemos deducir que hay un solo nodo que unia varios grupos de gran tamaño.
 El ataque por degree es mucho mas gradual, pero aun asi deshace el grafo en aproximadamente 35 ataques.
 
+\subsection{Enriquecimiento funcional}
+
+El enriquecimiento funcional realizado est\'a en dos tablas distintas, una para cada columna de la tabla de genes que forma nuestro subgrafo.\newline
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[scale = 0.2]{figures/GenesProteinTargeting.png}
+	\caption{Genes que participan en \textit{Protein Targeting, GO:0006605}}
+\end{figure}
+De las dos tablas obtenidas observamos que la primera solo contiene una fila de un t\'ermino GO que es un proceso biol\'ogico. Dicho t\'ermino es \textbf{GO:0006605} y es un proceso biol\'ogico que hace referencia a orientar a prote\'inas espec\'ificas a regiones particulares de una c\'elula, normalmente a \'organulos celulares delimitados por membrana.
+En la segunda tabla tenemos una gran multitud de t\'erminos de \textit{GO} apuntados. En total hay 2120 t\'erminos de los cuales 1586 son \textit{procesos bi\'ologicos}, otros 237 son \textit{funciones moleculares} y los \'ultimos 297 son \textit{componentes celulares}.\newline
+En este caso como nos encontramos con una gran cantidad de t\'erminos no los nombraremos uno por uno sino que se mostrar\'an los t\'erminos que se consideren m\'as importantes mediante un diagrama de barras como con una red con las principales funciones. \newline
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[scale = 0.2]{figures/Genes2Funciones.png}
+	\caption{Red de funciones principales del segundo vector de genes}
+\end{figure}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[scale = 0.3]{figures/barplotGenes2.png}
+	\caption{Diagrama de las funciones m\'as importantes}
+\end{figure}
+\clearpage
+
