@@ -1,4 +1,5 @@
 #### Filtrado de 950+ score
+library(clusterProfiler)
 
 redProteoma <- read.table("./HumanProteome.txt", sep = "", header = TRUE)
 
