@@ -1,6 +1,5 @@
 library(clusterProfiler)
 library(biomaRt)
-library(clusterProfiler)
 #Establecemos la conexiÃ³n con la base de datos
 db.Connection <- useEnsembl(biomart = "genes")
 #Tomamos el dataset que queremos usar, en este caso, el de genes humanos con formato ensembl
