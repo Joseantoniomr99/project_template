@@ -9,6 +9,7 @@ Para esto hemos empleado tres metodos, y nos quedaremos con aquel que nos permit
 Los métodos empleados son: bitR, biomaRt, y utilizar una tabla obtenida de la base de datos de uniprot. 
 
 \subsection{Obtención del grafo de relaciones proteinascovid-proteinasHumanas}
+Antes de abordar un problema con la gran cantidad de datos que tiene (11 millones de datos el proteoma humano), hemos creado el codigo JugarRedes.R, donde hemos creado dos dataframe con pocos datos, y dos objetos igraph para poder ir probando las diferentes funciones y formas de obtener el grafo. Una vez familiarizados con las funciones y trabajar con listas hemos pasado a la implementacion del grafo de unica componente conexa.
 Para la realizacion del grafo con una unica componente conexa, donde se forme la red minima del interactoma humano
 que permita conectar todas las proteínas viricas del SARS-CoV2, hemos usado las funciones all\_simple\_paths y all\_shortest\_paths 
 del paquete igraph de R. Debido al gran tamaño de la red y a las miles de combinaciones posibles, obteniamos caminos enormes que
