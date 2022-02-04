@@ -1,3 +1,5 @@
+library(xlsx)
+
 protTraduc<- read.csv("ProteomaTraducido.csv")
 network.table <- openxlsx::read.xlsx("Prey_Lookup_Table.xlsx")
 names(network.table)<- c(network.table[1,1],network.table[1,2],network.table[1,3],
