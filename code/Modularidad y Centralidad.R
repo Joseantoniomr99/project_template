@@ -1,8 +1,9 @@
 library(igraph)
 library(CINNA)
 library(cluster)
+library(brainGraph)
 
-### Centralidad
+### Modularidad:
 grafoUnion<-read.csv("grafoUnion.csv")
 Grafo<-graph_from_data_frame(grafoUnion,directed = FALSE)
 
@@ -20,7 +21,7 @@ plot(wt,Grafo,vertex.label=NA)
 d <-as.dendrogram(cwt)
 h <-as.hclust(cwt)
 
-### Modularidad:
+### Centralidad:
 
 #Selecciono unas cuantas medidas para estudiar la centralidad:
 medidasCentrality <- c("Shortest-Paths Betweenness Centrality","Page Rank","Closeness Centrality (Freeman)","Degree Centrality")
@@ -45,3 +46,12 @@ cat(paste0("El número de clusters con una centralidad esté entre 0.3 y 0.5 es 
 cat(paste0("El número de clusters con una centralidad mayor que 0.5 es ", length(closeness[closeness>=0.5])))
 
 write.table(closeness, file = "./Closeness.csv")
+
+
+### Robustez:
+
+#Haremos dos ataques distintos, uno dirigido mediante betweeness y otro con degree
+robBetweenAttack <- robustness(GrafoUnion)
+robDegreeAttack <- robustness(GrafoUnion, measure='degree')
+plot(robBetweenAttack$comp.size)
+plot(robDegreeAttack$comp.size)
