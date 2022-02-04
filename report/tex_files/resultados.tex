@@ -49,5 +49,12 @@ Este grafo se hizo con plot.igraph, y nos muestra los 68 modulos por separado.
 Aparte, vimos la posibilidad de representar un dendograma, pero no aporta ninguna informacion util debido a la cantidad de datos.
 
 
+\subsection{Centralidad}
+
+Tras realizar el an\'alisis de componentes, se ha observado que el m\'etodo de centralidad ganador ha sido el de \textbf{cercan\'ia}(closeness) de \textit{Spearman}. Dicho método considera como importancia aquellos nodos que están más cercanos de media al resto de nodos.
+Una vez escogido el m\'etodo de closeness, se ha realizado el estudio de la centralidad con la funci\'on \textit{closeness} del paquete \textbf{igraph}. Dicha funci\'on nos ha otorgado la centralidad de cada nodo respecto al sistema de manera normalizada(Valores de entre cero y uno).
+Analizando estos resultados, se ha obtenido que la media de la centralidad de los nodos de la red es \textbf{0.287}.
+Adem\'as se ha calculado cuantos nodos de la red usada(subgrafo de la red que forma una sola componente conexa) tienen ciertos valores de centralidad.
+En primer lugar, ho hay ningún valor de centralidad menor que 0.1. Con un valor de centralidad entre 0.1 y 0.3 hay un total de 1990 nodos, mientras que hay 898 nodos que presentan un valor de modularidad de entre 0.3 y 0.5. Por último, no hay ningún nodo con un valor de centralidad mayor de 0.5.
 
 
