@@ -40,6 +40,20 @@ Como ultima opción, decidimos hacer una simplificacion. Cogimos 2 genes humanos
 Probamos dos opciones, una de ellas utilizaba todas las combinaciones posibles entre estas dos proteinas de cada gen (51 proteinas en total) y la otra utilizaba una proteina con su siguiente. Para optimizacion de tiempo y memoria usamos la segunda de las opciones, obteniendo 100 elementos donde cada una tenia varias listas de uniones de grafos. Como muchas de ellas se repetian usamos unique y conseguimos reducir estas repeticiones. Obteniendo 18012 rutas, que seguiamn teniendo elementos repetidos. A continuación, creamos dos vectores, y hacemos un bucle que vaya recorriendo estas rutas, y me vaya añadiente una proteina en un vector, y la proteina con la que interacciona en el siguiente. Todo esto se integra en un data frame y usamos unique para eliminar las repeticiones. 
 Este dataframe lo convertimos en objeto igraph y mediante el operados de unión conseguimos unir dos objetos igraph, esto unira los dos objetos igraph y ya podremos comprobar si hemos obtenido o no la componete conexa usando la función components. Es importante mencionar que para poder crear las rutas, nuestro grafo de proteoma debe tener una unica componente conexa, y si tiene mas de una, las proteinas buscadas pertenezcan al mismo. El resultado se comentara en el apartado de discusiones. 
 
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[scale = 0.3]{figures/all_simple_pathsTODOS.png}
+	\caption{Captura del tamaño de rutas creadas,sin compilacion completa con función all simple paths}
+\end{figure}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[scale = 0.3]{figures/all_shortes_pathsUnaProt.png}
+	\caption{Captura del tamaño de rutas creadas,sin compilacion completa con función all shortest paths}
+\end{figure}
+
+
+
 \subsection{Analisis de propiedades del grafo obtenido}
 Realizaremos un analisis exahustivo de la red obtenida, analizando las propiedades estudiadas en clase.
 
@@ -52,6 +66,12 @@ Encontramos los resultados de esta parte en la carpeta code y el codigo Analisis
 - Diametro: se denomina asi al máximo camino más corto entre dos nodos medido por el numero de elnaces recorrido. Un diametro menor indica mayor habilidad de comunicacion en la red. Debe preocurarse que el diametro de las redes de intercomunicación sea lo más pequeño posible. 
   * Diametro red proteoma humano: 5
   * Diametro red obtenida: 7
+  
+  \begin{figure}[ht!]
+	\centering
+	\includegraphics[scale = 0.3]{Rplot01.png}
+	\caption{Representacion del diametro de la red conseguida}
+\end{figure}
 
 - Grado: es el número de conexiones de un vertice o nodo con otros nodos. 
   * Grado maximo red proteoma humano: 15014, solo para un nodo
