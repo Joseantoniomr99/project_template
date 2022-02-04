@@ -40,7 +40,33 @@ Como ultima opción, decidimos hacer una simplificacion. Cogimos 2 genes humanos
 Probamos dos opciones, una de ellas utilizaba todas las combinaciones posibles entre estas dos proteinas de cada gen (51 proteinas en total) y la otra utilizaba una proteina con su siguiente. Para optimizacion de tiempo y memoria usamos la segunda de las opciones, obteniendo 100 elementos donde cada una tenia varias listas de uniones de grafos. Como muchas de ellas se repetian usamos unique y conseguimos reducir estas repeticiones. Obteniendo 18012 rutas, que seguiamn teniendo elementos repetidos. A continuación, creamos dos vectores, y hacemos un bucle que vaya recorriendo estas rutas, y me vaya añadiente una proteina en un vector, y la proteina con la que interacciona en el siguiente. Todo esto se integra en un data frame y usamos unique para eliminar las repeticiones. 
 Este dataframe lo convertimos en objeto igraph y mediante el operados de unión conseguimos unir dos objetos igraph, esto unira los dos objetos igraph y ya podremos comprobar si hemos obtenido o no la componete conexa usando la función components. Es importante mencionar que para poder crear las rutas, nuestro grafo de proteoma debe tener una unica componente conexa, y si tiene mas de una, las proteinas buscadas pertenezcan al mismo. El resultado se comentara en el apartado de discusiones. 
 
-\subsection{Modularidad}
+\subsection{Analisis de propiedades del grafo obtenido}
+Realizaremos un analisis exahustivo de la red obtenida, analizando las propiedades estudiadas en clase.
+
+\subsubsection{Comparacion entre la red obtenida y la red humana}
+Encontramos los resultados de esta parte en la carpeta code y el codigo AnalisisRedFinal.R. Se estudian las siguientes componentes:
+- Densidad: es considerada como una medida de cohesion entre los nodos de la red. Es una medida del numero de vinculos existentes en la red, presentados como una proporcion del numero de vinculos posibles. 
+  * Densidad red proteoma humano: 0.03
+  * Densidad red obtenida: 0.002
+- Reprocidad: es una medida de probabilidad de que los vértices de una red dirigida se vinculen mutuamente entre sí. En general las redes reales tienen una reprocidad entre 0 y 1. Obtenemos un 1 para ambas redes.
+- Diametro: se denomina asi al máximo camino más corto entre dos nodos medido por el numero de elnaces recorrido. Un diametro menor indica mayor habilidad de comunicacion en la red. Debe preocurarse que el diametro de las redes de intercomunicación sea lo más pequeño posible. 
+  * Diametro red proteoma humano: 5
+  * Diametro red obtenida: 7
+
+- Grado: es el número de conexiones de un vertice o nodo con otros nodos. 
+  * Grado maximo red proteoma humano: 15014, solo para un nodo
+  * Grado minimo red proteoma humano: 2, para 16 nodos
+  * Grado maximo red obtenida: 620, solo para un nodo
+  * Grado minimo red obtenida 1, parao 208 nodos
+- Distribución de grado: la distribución de grado en una red representa habitualmente como P(K) y es definida como la fraccion de nodos en la red con un cierto grado k. 
+- Distancia media: es el promedio o media de las distancias entre vertices en un grafo conexo, es una medida natural de la compacidad del grafo. 
+  *Distancia media red proteoma humano: 2.040557
+  *Distancia red obtenida: 3.517751
+- Asortatividad: es la preferencia de los nodos de una red por unirse a otros que le son similares en alguna caracteristicas. Habitualmente se estudia en funcion del grado.
+  *Asortatividad red proteoma humano: 0.1040102
+  *Asortatividad red obtenida:-0.55738
+
+\subsubsection{Modularidad}
 
 Para obtener la modularidad del grafo hemos usado el paquete igraph. El codigo correspondiente se encuentra en un archivo llamado Modularidad y Centralidad.R
 Lo primero fue obtener los modulos del grafo mediante la función cluster walktrap. Obtuvimos 68 grupos de tamaño diverso, desde 4 hasta 1778. Una vez obtenido esto, se le pasa a la funcion modularity transformándolo a un vector de membership (con la funcion membership) y pasando el grafo original como parámetro. El resultado es una modularidad de 0.935.
@@ -49,7 +75,7 @@ Este grafo se hizo con plot.igraph, y nos muestra los 68 modulos por separado.
 Aparte, vimos la posibilidad de representar un dendograma, pero no aporta ninguna informacion util debido a la cantidad de datos.
 
 
-\subsection{Centralidad}
+\subsubsection{Centralidad}
 
 Tras realizar el an\'alisis de componentes, se ha observado que el m\'etodo de centralidad ganador ha sido el de \textbf{cercan\'ia}(closeness) de \textit{Spearman}. Dicho método considera como importancia aquellos nodos que están más cercanos de media al resto de nodos.
 Una vez escogido el m\'etodo de closeness, se ha realizado el estudio de la centralidad con la funci\'on \textit{closeness} del paquete \textbf{igraph}. Dicha funci\'on nos ha otorgado la centralidad de cada nodo respecto al sistema de manera normalizada(Valores de entre cero y uno).
@@ -58,7 +84,7 @@ Adem\'as se ha calculado cuantos nodos de la red usada(subgrafo de la red que fo
 En primer lugar, ho hay ningún valor de centralidad menor que 0.1. Con un valor de centralidad entre 0.1 y 0.3 hay un total de 1990 nodos, mientras que hay 898 nodos que presentan un valor de modularidad de entre 0.3 y 0.5. Por último, no hay ningún nodo con un valor de centralidad mayor de 0.5.
 
 
-\subsection{Robustez}
+\subsubsection{Robustez}
 
 Para comprobar la robustez de nuestro grafo vamos a realizar dos ataques dirigidos, uno basado en el degree y otro en betweenness
 
