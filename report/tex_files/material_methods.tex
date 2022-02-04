@@ -16,6 +16,10 @@ del paquete igraph de R. Debido al gran tamaño de la red y a las miles de combi
 se han abordado realizando pequeñas modificaciones que nos permita obtener la componente conexa con un tiempo de ejecucion y 
 uso de memoria razonable. 
 
+\subsection{Comparacion entre la red obtenida y la red humana}
+Usando funciones del paquete igraph se han analizado ciertas propiedades de ambas redes para poder compararlas. 
+Las propiedades analizadas son: densidad, reprocidad, diametro, grado, distribucion de grado, distancia media y asortatividad.
+
 \subsection{Obtencion de la modularidad}
 Para estudiar la modularidad del grafo obtenido hemos utilizado unicamente el paquete iGraph, ya que su combinacion de funciones nos permite obtener justo lo que necesitamos.
 En este caso, las funciones principales son cluster\_walktrap y modularity. Cluster\_walktrap encontrara los subgrafos o comunidades en nuestro grafo a traves de recorridos aleatorios, y modulatiry calculara la modularidad a partir de ellos. 
