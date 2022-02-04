@@ -1,3 +1,6 @@
+library(igraph)
+library(gtools)
+library(dplyr)
 tablaUniprot<- read.csv(file="data.csv", sep="", header = TRUE)
 tablaUniprot$Cross.reference<- NULL
 tablaUniprot$X.STRING.<-NULL
