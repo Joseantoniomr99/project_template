@@ -52,6 +52,14 @@ write.table(genes_df_GO_1, file = "./EnriquecimientoFuncional1.txt")
 
 write.table(genes_df_GO_2, file = "./EnriquecimientoFuncional2.txt")
 
-
+png(filename = "GenesProteinTargeting.png")
+cnetplot(genes_df_GO_1)
+dev.off()
+png(filename = "Genes2Funciones.png")
+cnetplot(genes_df_GO_2)
+dev.off()
+png(filename = "barplotGenes2.png")
+barplot(genes_df_GO_2)
+dev.off()
 
 
