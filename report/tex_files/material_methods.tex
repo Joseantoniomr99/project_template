@@ -21,7 +21,7 @@ En este caso, las funciones principales son cluster\_walktrap y modularity. Clus
 A parte, la funcion communities me ha permitido ver claramente los grupos, y posteriormente representarlos con plot.igraph.
 
 \subsection{Obtencion de la centralidad}
-La centralidad determina la importancia que puede obtener un nodo dentro de una red.
-Con el objetivo de estudiar la centralidad de nuestra red, se ha decidido emplear los paquetes \textbf{igraph} y \textbf{CINNA} principalmente.
+La centralidad determina la importancia que puede obtener un nodo dentro de una red, sin embargo, esta importancia puede medirse de numerosas formas, siendo algunas de ellas m\'as correctas en ocasiones que otras.
+Con el objetivo de estudiar la centralidad de nuestra red, se ha decidido emplear los paquetes \textbf{igraph} y \textbf{CINNA} principalmente. Adem\'as, se ha utilizado un sistema m\'as simple pero que forma una sola componente conexa, debido al alto costo de computaci\'on que tiene el formar una sola componente conexa con todos los nodos que tenemos.
 Mediante el paquete CINNA hemos decidido comprobar la centralidad que se obtiene mediante algunos de los metodos mas comunes como pueden ser el algoritmo \textbf{page-rank}, centralidad mediante el grado de cada \textbf{nodo}, la centralidad basada en la \textbf{cercania} y la centralidad a traves del \textbf{betweeness}(capacidad para estar en medio de los paths biologicos importantes).
-Se ha escogido el algoritmo closeness ya que se ha visto como el más eficiente según la pca.
+Para obtener el m\'etodo de centralidad que sea considerado m\'as adecuado en nuestro caso, realizaremos una \textbf{pca}(an\'alisis de componentes) en la que se ver\'a reflejada la participaci\'on de cada medida de modularidad en nuestros datos. De esta manera podremos coger el método más adecuado para estos datos.
