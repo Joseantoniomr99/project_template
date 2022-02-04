@@ -10,6 +10,13 @@ Hemos podido comprobar que el grafo del proteoma total formaba una unica compone
 Tambien se podria haber utilizado las matrices de adyacencia para obtener rutas, tal y como se vio en clase de teoria, pero preferimos haber optado por el metodo del uso de funciones del paquete igraph. La funcion empleada para ver si el grafo obtenido es conexo es components, donde su parametro no indica el numero de componentes, y su parametro csize indica el numero de vertices diferentes. 
 Por tanto, obtenemos una red formada por 2888 nodos, 9333 enlaces entre ellos y una unica compoente conexa. De la cual podremos analizar su modularidad y analisis funcional.
 
+\subsection{Comparacion entre la red obtenida y la red humana}
+Vistos los resultados de la comparación podremos comentar lo siguiente:
+- Vemos que la red de proteoma humana es más densa, por tanto, contiene muchas más conexiones entre nodos que la nueva creada.
+- Observamos que la red del porteoma humana tiene caminos mas cortos entre si que la red obtenida, consiguiendo asi una red menos compacta.
+- Aqui observamos una de las propiedades de las redes reales donde vemos que tenemos unos pocos nodos de alto grado y muchos nodos de grado mas bajo. 
+- Una característica destacable es que en la red humana los nodos con el mismo grado tiende a undirse entres si, pero en nuestra red obtenida la asortatividad es muy baja.
+- La distribución de grado es más o menos similar en ambas, y no siguen una distribucion binomial que corresponde a grafo aleatorios. Sino que la frecuencia va aumentando con el grado, para que asi se puedan ir formando los denominados hubs.
 \subsection{Centralidad obtenida}
 Tras realizar un breve an\'alisis de la centralidad de nuestro modelo usado(hay que recordar que estamos usando un subgrafo que forma una sola componente conexa, porque todo el grafo entero como componente conexa tiene un costo computacional demasiado elevado), hemos obtenido resultados que no eran del todo esperados.\newline
 Recapitulando, los valores obtenidos se han normalizado mediante la funci\'on \textbf{closeness} que obtiene la centralidad, es decir, todos los valores de centralidad est\'an comprendidos entre 0 y 1. En primer lugar, hemos obtenido una media de centralidad de 0.287, n\'umero que puede ser considerado muy bajo, dado que podr\'ia llegar hasta 1. Esto quiere decir que probablemente gran parte de nuestros nodos del subgrafo carezcan de importancia dentro de este seg\'un su posici\'on relativa en el subgrafo. Tambi\'en se podr\'ia interpretar como que hay bastantes nodos distanciados del resto de nodos en la red, por lo que la componente conexa que tenemos podr\'ia estar muy dispersa.\newline
